@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  targetNamespace="http://bpmn.io/schema/bpmn"
+  id="Definitions_1">
+
+  <!-- PROCESS: Global Financial Transmission -->
+  <process id="global_financial_transmission" isExecutable="false">
+
+    <!-- START EVENT -->
+    <startEvent id="startEvent" name="Economic stimulus required">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+
+    <!-- FEDERAL RESERVE POOL -->
+    <subProcess id="federalReserve" name="Federal Reserve Operations">
+
+      <!-- Open Market Operations -->
+      <task id="openMarketOps" name="Open Market Operations">
+        <extensionElements>
+          <property name="data">$6.4T asset purchases (2008-2022)</property>
+        </extensionElements>
+        <incoming>Flow_1</incoming>
+        <outgoing>Flow_2</outgoing>
+      </task>
+
+      <!-- Asset Purchases -->
+      <task id="assetPurchases" name="Purchase Treasury/MBS Bonds">
+        <extensionElements>
+          <property name="data">Primary dealers receive reserves</property>
+        </extensionElements>
+        <incoming>Flow_2</incoming>
+        <outgoing>Flow_3</outgoing>
+      </task>
+
+      <!-- Reserve Management -->
+      <task id="reserveManagement" name="Manage Bank Reserves">
+        <extensionElements>
+          <property name="data">Reserves: $3.3T (2022)</property>
+        </extensionElements>
+        <incoming>Flow_3</incoming>
+        <outgoing>Flow_4</outgoing>
+      </task>
+
+      <!-- Set Interest Rates -->
+      <task id="setInterestRates" name="Set Federal Funds Rate">
+        <extensionElements>
+          <property name="data">0.25% (2008-2015), 0-0.25% (2020-2022)</property>
+        </extensionElements>
+        <incoming>Flow_4</incoming>
+        <outgoing>Flow_5</outgoing>
+      </task>
+
+      <!-- Flow connections within subprocess -->
+      <sequenceFlow id="Flow_2" sourceRef="openMarketOps" targetRef="assetPurchases"/>
+      <sequenceFlow id="Flow_3" sourceRef="assetPurchases" targetRef="reserveManagement"/>
+      <sequenceFlow id="Flow_4" sourceRef="reserveManagement" targetRef="setInterestRates"/>
+    </subProcess>
+
+    <!-- BANKING SYSTEM POOL -->
+    <subProcess id="bankingSystem" name="Banking System Transmission">
+
+      <!-- Receive Reserves -->
+      <receiveTask id="receiveReserves" name="Receive Increased Reserves">
+        <incoming>Flow_5</incoming>
+        <outgoing>Flow_6</outgoing>
+      </receiveTask>
+
+      <!-- Expand Lending -->
+      <task id="expandLending" name="Expand Lending Capacity">
+        <extensionElements>
+          <property name="data">Fractional reserve system</property>
+        </extensionElements>
+        <incoming>Flow_6</incoming>
+        <outgoing>Flow_7</outgoing>
+      </task>
+
+      <!-- Set Commercial Rates -->
+      <task id="setCommercialRates" name="Set Commercial Loan Rates">
+        <extensionElements>
+          <property name="data">3-5% interest rates</property>
+        </extensionElements>
+        <incoming>Flow_7</incoming>
+        <outgoing>Flow_8</outgoing>
+      </task>
+
+      <!-- Generate Bank Profits -->
+      <task id="bankProfits" name="Generate Bank Profits">
+        <extensionElements>
+          <property name="data">Net interest margin</property>
+        </extensionElements>
+        <incoming>Flow_15</incoming>
+        <outgoing>Flow_16</outgoing>
+      </task>
+
+      <!-- Flow connections within subprocess -->
+      <sequenceFlow id="Flow_6" sourceRef="receiveReserves" targetRef="expandLending"/>
+      <sequenceFlow id="Flow_7" sourceRef="expandLending" targetRef="setCommercialRates"/>
+    </subProcess>
+
+    <!-- CORPORATE & GOVERNMENT POOL -->
+    <subProcess id="corporateGov" name="Corporate & Government Flows">
+
+      <!-- Corporate Borrowing -->
+      <task id="corporateBorrowing" name="Corporate Access to Capital">
+        <extensionElements>
+          <property name="data">Corporate debt: $10.5T (2020)</property>
+        </extensionElements>
+        <incoming>Flow_8</incoming>
+        <outgoing>Flow_9</outgoing>
+      </task>
+
+      <!-- Government Debt Issuance -->
+      <task id="govDebtIssuance" name="Treasury Debt Issuance">
+        <extensionElements>
+          <property name="data">Public debt: $31.4T (2023)</property>
+        </extensionElements>
+        <incoming>Flow_10</incoming>
+        <outgoing>Flow_11</outgoing>
+      </task>
+
+      <!-- Government Spending -->
+      <task id="govSpending" name="Government Spending">
+        <extensionElements>
+          <property name="data">Foreign aid: $50B/year</property>
+        </extensionElements>
+        <incoming>Flow_11</incoming>
+        <incoming>Flow_17</incoming>
+        <outgoing>Flow_12</outgoing>
+      </task>
+
+      <!-- Tax Collection -->
+      <task id="taxCollection" name="Collect Taxes">
+        <extensionElements>
+          <property name="data">Federal revenue: $4.9T (2022)</property>
+        </extensionElements>
+        <incoming>Flow_9</incoming>
+        <incoming>Flow_16</incoming>
+        <outgoing>Flow_17</outgoing>
+      </task>
+
+      <!-- Flow connections within subprocess -->
+      <sequenceFlow id="Flow_9" sourceRef="corporateBorrowing" targetRef="taxCollection"/>
+      <sequenceFlow id="Flow_10" sourceRef="assetPurchases" targetRef="govDebtIssuance"/>
+      <sequenceFlow id="Flow_11" sourceRef="govDebtIssuance" targetRef="govSpending"/>
+      <sequenceFlow id="Flow_17" sourceRef="taxCollection" targetRef="govSpending"/>
+    </subProcess>
+
+    <!-- INTERNATIONAL INSTITUTIONS POOL -->
+    <subProcess id="internationalInstitutions" name="International Lending">
+
+      <!-- IMF Allocation -->
+      <task id="imfAllocation" name="IMF SDR Allocation">
+        <extensionElements>
+          <property name="data">$650B (2021)</property>
+        </extensionElements>
+        <incoming>Flow_12</incoming>
+        <outgoing>Flow_13</outgoing>
+      </task>
+
+      <!-- World Bank Lending -->
+      <task id="worldBankLending" name="World Bank Commitments">
+        <extensionElements>
+          <property name="data">$104B (FY2022)</property>
+        </extensionElements>
+        <incoming>Flow_12</incoming>
+        <outgoing>Flow_13</outgoing>
+      </task>
+
+      <!-- Concessional Lending -->
+      <task id="concessionalLending" name="Provide Concessional Loans">
+        <extensionElements>
+          <property name="data">0-2% interest rates</property>
+        </extensionElements>
+        <incoming>Flow_13</incoming>
+        <outgoing>Flow_14</outgoing>
+      </task>
+
+      <!-- Receive Repayments -->
+      <receiveTask id="receiveRepayments" name="Receive Loan Repayments">
+        <incoming>Flow_22</incoming>
+        <outgoing>Flow_23</outgoing>
+      </receiveTask>
+
+      <!-- Parallel Gateway -->
+      <parallelGateway id="gateway1" name="Parallel Distribution">
+        <incoming>Flow_12</incoming>
+        <outgoing>Flow_imf</outgoing>
+        <outgoing>Flow_wb</outgoing>
+      </parallelGateway>
+
+      <sequenceFlow id="Flow_12" sourceRef="govSpending" targetRef="gateway1"/>
+      <sequenceFlow id="Flow_imf" sourceRef="gateway1" targetRef="imfAllocation"/>
+      <sequenceFlow id="Flow_wb" sourceRef="gateway1" targetRef="worldBankLending"/>
+      <sequenceFlow id="Flow_13" sourceRef="imfAllocation" targetRef="concessionalLending"/>
+      <sequenceFlow id="Flow_wb2" sourceRef="worldBankLending" targetRef="concessionalLending"/>
+    </subProcess>
+
+    <!-- DEVELOPING COUNTRIES POOL -->
+    <subProcess id="developingCountries" name="Developing Country Operations">
+
+      <!-- Receive USD Loans -->
+      <receiveTask id="receiveLoans" name="Receive USD Loans">
+        <incoming>Flow_14</incoming>
+        <outgoing>Flow_18</outgoing>
+      </receiveTask>
+
+      <!-- Reserve Accumulation -->
+      <task id="reserveAccumulation" name="Accumulate Foreign Reserves">
+        <extensionElements>
+          <property name="data">$12T total (2022)</property>
+        </extensionElements>
+        <incoming>Flow_18</incoming>
+        <outgoing>Flow_19</outgoing>
+      </task>
+
+      <!-- Currency Conversion -->
+      <task id="currencyConversion" name="Convert to Local Currency">
+        <extensionElements>
+          <property name="data">Sterilization operations</property>
+        </extensionElements>
+        <incoming>Flow_19</incoming>
+        <outgoing>Flow_20</outgoing>
+      </task>
+
+      <!-- Domestic Relending -->
+      <task id="domesticRelending" name="Relend Domestically">
+        <extensionElements>
+          <property name="data">Add risk premiums</property>
+        </extensionElements>
+        <incoming>Flow_20</incoming>
+        <outgoing>Flow_21</outgoing>
+      </task>
+
+      <!-- Generate Returns -->
+      <task id="generateReturns" name="Generate Investment Returns">
+        <extensionElements>
+          <property name="data">5-8% average returns</property>
+        </extensionElements>
+        <incoming>Flow_21</incoming>
+        <outgoing>Flow_22</outgoing>
+      </task>
+
+      <!-- Debt Service -->
+      <task id="debtService" name="Service External Debt">
+        <extensionElements>
+          <property name="data">20%+ of revenue for low-income countries</property>
+        </extensionElements>
+        <incoming>Flow_21</incoming>
+        <outgoing>Flow_22</outgoing>
+      </task>
+
+      <!-- Exclusive Gateway for risk assessment -->
+      <exclusiveGateway id="riskGateway" name="Debt Sustainability Check">
+        <incoming>Flow_21</incoming>
+        <outgoing>Flow_sustainable</outgoing>
+        <outgoing>Flow_distress</outgoing>
+      </exclusiveGateway>
+
+      <!-- Debt Distress Path -->
+      <intermediateCatchEvent id="debtDistressEvent" name="Debt Distress">
+        <timerEventDefinition>
+          <timeDuration>PT0S</timeDuration>
+        </timerEventDefinition>
+        <incoming>Flow_distress</incoming>
+        <outgoing>Flow_distress2</outgoing>
+      </intermediateCatchEvent>
+
+      <endEvent id="debtCrisis" name="Debt Crisis">
+        <incoming>Flow_distress2</incoming>
+      </endEvent>
+
+      <sequenceFlow id="Flow_18" sourceRef="receiveLoans" targetRef="reserveAccumulation"/>
+      <sequenceFlow id="Flow_19" sourceRef="reserveAccumulation" targetRef="currencyConversion"/>
+      <sequenceFlow id="Flow_20" sourceRef="currencyConversion" targetRef="domesticRelending"/>
+      <sequenceFlow id="Flow_21" sourceRef="domesticRelending" targetRef="riskGateway"/>
+      <sequenceFlow id="Flow_sustainable" sourceRef="riskGateway" targetRef="generateReturns"/>
+      <sequenceFlow id="Flow_distress" sourceRef="riskGateway" targetRef="debtDistressEvent"/>
+      <sequenceFlow id="Flow_distress2" sourceRef="debtDistressEvent" targetRef="debtCrisis"/>
+    </subProcess>
+
+    <!-- RETURN FLOWS & SYSTEMIC EFFECTS -->
+    <subProcess id="returnFlows" name="Return Flows & Systemic Effects">
+
+      <!-- Dollar Repatriation -->
+      <task id="dollarRepatriation" name="Dollar Repatriation">
+        <incoming>Flow_22</incoming>
+        <outgoing>Flow_23</outgoing>
+      </task>
+
+      <!-- Inflation Transmission -->
+      <task id="inflationTransmission" name="Inflation Transmission">
+        <extensionElements>
+          <property name="data">US CPI: 9.1% (2022 peak)</property>
+        </extensionElements>
+        <incoming>Flow_24</incoming>
+        <outgoing>Flow_25</outgoing>
+      </task>
+
+      <!-- Global Inflation -->
+      <task id="globalInflation" name="Global Inflation Spillover">
+        <extensionElements>
+          <property name="data">World avg CPI: 8.8% (2022)</property>
+        </extensionElements>
+        <incoming>Flow_25</incoming>
+        <outgoing>Flow_26</outgoing>
+      </task>
+
+      <!-- Monetary Policy Response -->
+      <task id="policyResponse" name="Monetary Policy Response">
+        <extensionElements>
+          <property name="data">Rate hikes to 5.25-5.5% (2023)</property>
+        </extensionElements>
+        <incoming>Flow_26</incoming>
+        <outgoing>Flow_27</outgoing>
+      </task>
+
+      <sequenceFlow id="Flow_22" sourceRef="generateReturns" targetRef="dollarRepatriation"/>
+      <sequenceFlow id="Flow_24" sourceRef="openMarketOps" targetRef="inflationTransmission"/>
+      <sequenceFlow id="Flow_25" sourceRef="inflationTransmission" targetRef="globalInflation"/>
+      <sequenceFlow id="Flow_26" sourceRef="globalInflation" targetRef="policyResponse"/>
+    </subProcess>
+
+    <!-- MAIN SEQUENCE FLOWS -->
+    <sequenceFlow id="Flow_1" sourceRef="startEvent" targetRef="federalReserve"/>
+    <sequenceFlow id="Flow_5" sourceRef="federalReserve" targetRef="bankingSystem"/>
+    <sequenceFlow id="Flow_8" sourceRef="bankingSystem" targetRef="corporateGov"/>
+    <sequenceFlow id="Flow_14" sourceRef="internationalInstitutions" targetRef="developingCountries"/>
+    <sequenceFlow id="Flow_15" sourceRef="setCommercialRates" targetRef="bankProfits"/>
+    <sequenceFlow id="Flow_16" sourceRef="bankProfits" targetRef="taxCollection"/>
+    <sequenceFlow id="Flow_23" sourceRef="dollarRepatriation" targetRef="receiveRepayments"/>
+
+    <!-- CYCLE COMPLETION -->
+    <intermediateCatchEvent id="cycleTrigger" name="New Economic Cycle">
+      <messageEventDefinition/>
+      <incoming>Flow_27</incoming>
+      <outgoing>Flow_28</outgoing>
+    </intermediateCatchEvent>
+
+    <endEvent id="endEvent" name="Cycle Complete">
+      <incoming>Flow_28</incoming>
+    </endEvent>
+
+    <sequenceFlow id="Flow_27" sourceRef="policyResponse" targetRef="cycleTrigger"/>
+    <sequenceFlow id="Flow_28" sourceRef="cycleTrigger" targetRef="endEvent"/>
+
+  </process>
+
+  <!-- BPMN DIAGRAM ELEMENTS -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="global_financial_transmission">
+
+      <!-- Start Event -->
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="startEvent">
+        <dc:Bounds x="152" y="352" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="140" y="395" width="60" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Federal Reserve Pool -->
+      <bpmndi:BPMNShape id="SubProcess_1_di" bpmnElement="federalReserve">
+        <dc:Bounds x="200" y="100" width="600" height="150"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="70" width="200" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Banking System Pool -->
+      <bpmndi:BPMNShape id="SubProcess_2_di" bpmnElement="bankingSystem">
+        <dc:Bounds x="200" y="270" width="600" height="150"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="240" width="200" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Corporate & Government Pool -->
+      <bpmndi:BPMNShape id="SubProcess_3_di" bpmnElement="corporateGov">
+        <dc:Bounds x="200" y="440" width="600" height="150"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="410" width="200" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- International Institutions Pool -->
+      <bpmndi:BPMNShape id="SubProcess_4_di" bpmnElement="internationalInstitutions">
+        <dc:Bounds x="850" y="100" width="600" height="150"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1050" y="70" width="200" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Developing Countries Pool -->
+      <bpmndi:BPMNShape id="SubProcess_5_di" bpmnElement="developingCountries">
+        <dc:Bounds x="850" y="270" width="600" height="200"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1050" y="240" width="200" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Return Flows Pool -->
+      <bpmndi:BPMNShape id="SubProcess_6_di" bpmnElement="returnFlows">
+        <dc:Bounds x="850" y="490" width="600" height="150"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1050" y="460" width="200" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- Sequence Flows -->
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="188" y="370"/>
+        <di:waypoint x="200" y="175"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="800" y="175"/>
+        <di:waypoint x="200" y="345"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- End Event -->
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="endEvent">
+        <dc:Bounds x="1482" y="552" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1470" y="595" width="60" height="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
