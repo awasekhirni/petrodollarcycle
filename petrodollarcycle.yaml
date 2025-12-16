@@ -1,0 +1,325 @@
+diagram:
+  title: "Global Financial Transmission Mechanism (2008-2023 Data)"
+  type: flowchart
+  orientation: left-to-right
+  
+nodes:
+  - id: fed_print
+    label: "Federal Reserve creates reserves via Open Market Operations"
+    type: start
+    data: "$6.4T asset purchases (2008-2022 QE)"
+    style: "fill:#e1f5fe;stroke:#01579b"
+    
+  - id: treasury_bonds
+    label: "Fed buys Treasury/MBS bonds"
+    data: "Primary dealers receive reserves"
+    style: "fill:#e1f5fe;stroke:#01579b"
+    
+  - id: bank_reserves
+    label: "Bank reserves increase to $3.3T (2022)"
+    data: "Reserve requirements phased out (March 2020)"
+    style: "fill:#e1f5fe;stroke:#01579b"
+    
+  - id: bank_lending
+    label: "Bank lending capacity expands"
+    data: "Fractional reserve system"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: interest_rates
+    label: "Fed Funds Rate: 0.25% (2008-2015)"
+    sublabel: "0-0.25% (2020-2022)"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: corporate_loans
+    label: "Commercial loan rates: 3-5%"
+    data: "Business loans: Prime + spread"
+    style: "fill:#fce4ec;stroke:#880e4f"
+    
+  - id: bailouts
+    label: "Corporate bailouts: $800B (2008)"
+    sublabel: "PPP loans: $800B (2020-2021)"
+    style: "fill:#fce4ec;stroke:#880e4f"
+    
+  - id: corporate_debt
+    label: "Corporate debt reaches $10.5T (2020)"
+    style: "fill:#fce4ec;stroke:#880e4f"
+    
+  - id: treasury_debt
+    label: "Treasury issues debt"
+    data: "Public debt: $31.4T (2023)"
+    style: "fill:#fff3e0;stroke:#e65100"
+    
+  - id: gov_spending
+    label: "Government spending"
+    data: "Foreign aid: $50B/year average"
+    style: "fill:#fff3e0;stroke:#e65100"
+    
+  - id: imf_sdr
+    label: "IMF Special Drawing Rights"
+    data: "$650B allocation (2021)"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: world_bank
+    label: "World Bank lending"
+    data: "$104B commitments (FY2022)"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: usaid
+    label: "USAID bilateral loans"
+    data: "$20B/year average"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: dev_countries
+    label: "Developing countries receive USD loans"
+    style: "fill:#fff3e0;stroke:#e65100"
+    
+  - id: foreign_reserves
+    label: "Central banks accumulate foreign reserves"
+    data: "$12T total (2022)"
+    style: "fill:#fff3e0;stroke:#e65100"
+    
+  - id: currency_conversion
+    label: "Local currency conversion via sterilization"
+    style: "fill:#fff3e0;stroke:#e65100"
+    
+  - id: dfi_relending
+    label: "Development finance institutions relend domestically"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: interest_spreads
+    label: "Typical interest spreads"
+    data: "IMF: 0-4% concessional | Commercial: LIBOR + 3-8%"
+    style: "fill:#f3e5f5;stroke:#4a148c"
+    
+  - id: swf_investment
+    label: "Sovereign Wealth Funds invest"
+    data: "Returns: 5-8% average"
+    style: "fill:#f3e5f5;stroke:#4a148c"
+    
+  - id: local_banks
+    label: "Local banks add risk premiums"
+    data: "Africa avg lending rate: 12.5% (2022)"
+    style: "fill:#f3e5f5;stroke:#4a148c"
+    
+  - id: dollar_appreciation
+    label: "Dollar appreciation risk"
+    data: "USD index +25% (2014-2023)"
+    style: "fill:#ffebee;stroke:#c62828"
+    
+  - id: debt_distress
+    label: "Debt service challenges"
+    data: "60+ countries in debt distress (2023)"
+    style: "fill:#ffebee;stroke:#c62828"
+    
+  - id: debt_payments
+    label: "Debt service payments"
+    data: "Low-income countries: 20%+ of revenue"
+    style: "fill:#f3e5f5;stroke:#4a148c"
+    
+  - id: dollar_return
+    label: "Dollars return to US Treasury/creditors"
+    style: "fill:#e1f5fe;stroke:#01579b"
+    
+  - id: inflation_us
+    label: "Inflation transmission in US"
+    data: "CPI peaked at 9.1% (2022)"
+    style: "fill:#ffebee;stroke:#c62828"
+    
+  - id: global_inflation
+    label: "Global inflation spillover"
+    data: "World avg CPI: 8.8% (2022)"
+    style: "fill:#ffebee;stroke:#c62828"
+    
+  - id: fed_response
+    label: "Federal Reserve response"
+    data: "Rate hikes to 5.25-5.5% (2023)"
+    style: "fill:#f3e5f5;stroke:#4a148c"
+    
+  - id: corporate_taxes
+    label: "Corporate tax payments"
+    data: "Effective rate: 8-15% for large corps"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: bank_profits
+    label: "Bank profits taxed"
+    data: "Effective rate: ~20%"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: swf_returns
+    label: "Sovereign fund returns fund domestic budgets"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+  - id: fed_revenue
+    label: "US Federal revenue: $4.9T (2022)"
+    data: "17.4% of GDP"
+    style: "fill:#e8f5e8;stroke:#1b5e20"
+    
+edges:
+  - from: fed_print
+    to: treasury_bonds
+    label: "Open market operations"
+    
+  - from: treasury_bonds
+    to: bank_reserves
+    label: "Primary dealer system"
+    
+  - from: bank_reserves
+    to: bank_lending
+    label: "Reserve multiplier effect"
+    
+  - from: bank_lending
+    to: interest_rates
+    label: "Policy rate transmission"
+    
+  - from: interest_rates
+    to: corporate_loans
+    label: "Commercial rate setting"
+    
+  - from: corporate_loans
+    to: bailouts
+    label: "Emergency lending facilities"
+    
+  - from: bailouts
+    to: corporate_debt
+    label: "Corporate leverage increase"
+    
+  - from: treasury_bonds
+    to: treasury_debt
+    label: "Debt monetization"
+    
+  - from: treasury_debt
+    to: gov_spending
+    label: "Fiscal policy"
+    
+  - from: gov_spending
+    to: imf_sdr
+    label: "Multilateral contributions"
+    
+  - from: gov_spending
+    to: world_bank
+    label: "Capital subscriptions"
+    
+  - from: gov_spending
+    to: usaid
+    label: "Bilateral assistance"
+    
+  - from: [imf_sdr, world_bank, usaid]
+    to: dev_countries
+    label: "Capital flows"
+    
+  - from: dev_countries
+    to: foreign_reserves
+    label: "Reserve accumulation"
+    
+  - from: foreign_reserves
+    to: currency_conversion
+    label: "Sterilization operations"
+    
+  - from: currency_conversion
+    to: dfi_relending
+    label: "Domestic credit allocation"
+    
+  - from: dfi_relending
+    to: interest_spreads
+    label: "Risk-based pricing"
+    
+  - from: interest_spreads
+    to: swf_investment
+    label: "Sovereign investment"
+    
+  - from: interest_spreads
+    to: local_banks
+    label: "Commercial banking"
+    
+  - from: local_banks
+    to: dollar_appreciation
+    label: "Currency mismatch risk"
+    
+  - from: dollar_appreciation
+    to: debt_distress
+    label: "Debt sustainability pressure"
+    
+  - from: local_banks
+    to: debt_payments
+    label: "Interest payments"
+    
+  - from: debt_payments
+    to: dollar_return
+    label: "Capital repatriation"
+    
+  - from: fed_print
+    to: inflation_us
+    label: "Monetary expansion"
+    
+  - from: inflation_us
+    to: global_inflation
+    label: "Spillover effects"
+    
+  - from: global_inflation
+    to: fed_response
+    label: "Policy normalization"
+    
+  - from: fed_response
+    to: fed_print
+    label: "New monetary cycle"
+    
+  - from: corporate_debt
+    to: corporate_taxes
+    label: "Tax obligations"
+    
+  - from: bank_lending
+    to: bank_profits
+    label: "Net interest margin"
+    
+  - from: swf_investment
+    to: swf_returns
+    label: "Investment income"
+    
+  - from: [corporate_taxes, bank_profits]
+    to: fed_revenue
+    label: "Tax collection"
+    
+  - from: fed_revenue
+    to: gov_spending
+    label: "Budget allocation"
+    
+  - from: swf_returns
+    to: gov_spending
+    label: "Revenue sharing"
+    
+  - from: dollar_return
+    to: fed_revenue
+    label: "Interest income"
+
+phases:
+  - name: "Money Creation & Distribution"
+    nodes: [fed_print, treasury_bonds, bank_reserves]
+    
+  - name: "Banking Transmission"
+    nodes: [bank_lending, interest_rates]
+    
+  - name: "Corporate & Government Flows"
+    nodes: [corporate_loans, bailouts, corporate_debt, treasury_debt, gov_spending]
+    
+  - name: "International Lending"
+    nodes: [imf_sdr, world_bank, usaid, dev_countries]
+    
+  - name: "Developing Country Intermediation"
+    nodes: [foreign_reserves, currency_conversion, dfi_relending, interest_spreads]
+    
+  - name: "Profit Generation & Risks"
+    nodes: [swf_investment, local_banks, dollar_appreciation, debt_distress]
+    
+  - name: "Return Flows & Systemic Effects"
+    nodes: [debt_payments, dollar_return, inflation_us, global_inflation, fed_response]
+    
+  - name: "Taxation & Redistribution"
+    nodes: [corporate_taxes, bank_profits, swf_returns, fed_revenue]
+
+data_sources:
+  - "Federal Reserve Statistical Release H.4.1"
+  - "World Bank International Debt Statistics"
+  - "IMF World Economic Outlook"
+  - "U.S. Treasury Financial Report"
+  - "BIS Global Liquidity Indicators"
+  - "OECD Revenue Statistics"
